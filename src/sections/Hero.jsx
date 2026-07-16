@@ -12,8 +12,7 @@ function Hero() {
 
           <h1 className="max-w-2xl text-4xl font-black leading-tight text-white sm:text-6xl lg:text-7xl">
             Himanshu
-            <br />
-            Saini
+            <br/>
           </h1>
 
           <h2 className="mt-5 min-h-10 text-2xl font-semibold text-slate-300 sm:text-3xl">
@@ -21,6 +20,7 @@ function Hero() {
               words={[
                 "MERN Stack Developer",
                 "Frontend Developer",
+                "Backend Developer",
                 "Future AI Engineer",
                 "Tech Enthusiast",
               ]}
