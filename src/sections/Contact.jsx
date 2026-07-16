@@ -113,11 +113,11 @@ function Contact() {
             </div>
 
             <div className="mt-8 flex gap-3">
-              <a href="#" className="icon-link" aria-label="GitHub">
+              <a href="https://github.com/Code1588" className="icon-link" target="_blank" aria-label="GitHub">
                 <FaGithub />
               </a>
 
-              <a href="#" className="icon-link" aria-label="LinkedIn">
+              <a href="https://www.linkedin.com/in/himanshu-saini-080844296/" target="_blank" className="icon-link" aria-label="LinkedIn">
                 <FaLinkedin />
               </a>
             </div>
