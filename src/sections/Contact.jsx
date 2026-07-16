@@ -1,7 +1,14 @@
 import { Mail, MapPin, Phone } from "lucide-react";
+import emailjs from "emailjs-com";
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { useState } from "react";
 import SectionTitle from "../components/SectionTitle";
+
+const EMAIL_TO = "himanshusaini95099@gmail.com";
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
 const contactDetails = [
   {
@@ -22,8 +29,52 @@ const contactDetails = [
 ];
 
 function Contact() {
-  const handleSubmit = (event) => {
+  const [status, setStatus] = useState("");
+  const [isSending, setIsSending] = useState(false);
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const templateParams = {
+      from_name: formData.get("from_name"),
+      from_email: formData.get("from_email"),
+      subject: formData.get("subject"),
+      message: formData.get("message"),
+      reply_to: formData.get("from_email"),
+      to_email: EMAIL_TO,
+    };
+
+    if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
+      const mailSubject = encodeURIComponent(templateParams.subject);
+      const mailBody = encodeURIComponent(
+        `Name: ${templateParams.from_name}\nEmail: ${templateParams.from_email}\n\n${templateParams.message}`,
+      );
+
+      window.location.href = `mailto:${EMAIL_TO}?subject=${mailSubject}&body=${mailBody}`;
+      setStatus("Email app opened. Please send the draft message.");
+      return;
+    }
+
+    try {
+      setIsSending(true);
+      setStatus("");
+
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY,
+      );
+
+      form.reset();
+      setStatus("Message sent successfully.");
+    } catch {
+      setStatus("Message could not be sent. Please try again.");
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -80,22 +131,52 @@ function Contact() {
             className="glass grid gap-4 p-6 sm:p-8"
           >
             <div className="grid gap-4 sm:grid-cols-2">
-              <input type="text" placeholder="Your Name" className="field" />
+              <input
+                type="text"
+                name="from_name"
+                placeholder="Your Name"
+                className="field"
+                required
+              />
 
-              <input type="email" placeholder="Your Email" className="field" />
+              <input
+                type="email"
+                name="from_email"
+                placeholder="Your Email"
+                className="field"
+                required
+              />
             </div>
 
-            <input type="text" placeholder="Subject" className="field" />
+            <input
+              type="text"
+              name="subject"
+              placeholder="Subject"
+              className="field"
+              required
+            />
 
             <textarea
+              name="message"
               rows="6"
               placeholder="Message"
               className="field resize-none"
+              required
             />
 
-            <button type="submit" className="btn-primary w-full">
-              Send Message
+            <button
+              type="submit"
+              className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-70"
+              disabled={isSending}
+            >
+              {isSending ? "Sending..." : "Send Message"}
             </button>
+
+            {status && (
+              <p className="text-center text-sm font-semibold text-teal-200">
+                {status}
+              </p>
+            )}
           </motion.form>
         </div>
       </div>

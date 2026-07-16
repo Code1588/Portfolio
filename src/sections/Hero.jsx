@@ -12,7 +12,7 @@ function Hero() {
 
           <h1 className="max-w-2xl text-4xl font-black leading-tight text-white sm:text-6xl lg:text-7xl">
             Himanshu
-            <br/>
+            <br />
           </h1>
 
           <h2 className="mt-5 min-h-10 text-2xl font-semibold text-slate-300 sm:text-3xl">
@@ -36,7 +36,11 @@ function Hero() {
           </p>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <a href="#" className="btn-primary">
+            <a
+              href="/Resume.pdf"
+              download="Himanshu-Saini-Resume.pdf"
+              className="btn-primary"
+            >
               <ArrowDownToLine size={18} />
               Download Resume
             </a>
@@ -47,11 +51,11 @@ function Hero() {
           </div>
 
           <div className="mt-8 flex gap-3">
-            <a href="#" className="icon-link" aria-label="GitHub">
+            <a href="https://github.com/Code1588" className="icon-link" target="_blank" aria-label="GitHub">
               <FaGithub />
             </a>
 
-            <a href="#" className="icon-link" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/in/himanshu-saini-080844296/" target="_blank" className="icon-link" aria-label="LinkedIn">
               <FaLinkedin />
             </a>
 
