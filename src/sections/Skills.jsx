@@ -37,7 +37,7 @@ const skills = [
   { icon: <VscVscode />, name: "VS Code", color: "text-blue-300" },
   { icon: <VscOpenai />, name: "ChatGPT", color: "" },
   { icon: <SiGooglegemini />, name: "Gemini", color: "text-blue-700" },
-  {icon:<SiVercel/>,name:"Vercel" ,color:"text-black"}
+  { icon: <SiVercel />, name: "Vercel", color: "text-black" }
 ];
 
 function Skills() {
