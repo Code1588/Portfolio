@@ -37,7 +37,7 @@ function Hero() {
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <a
-              href="/Resume.pdf"
+              href="/Himanshu_Resume.pdf"
               download="Himanshu-Saini-Resume.pdf"
               className="btn-primary"
             >
